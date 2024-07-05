@@ -18,8 +18,20 @@ header {
   position: relative;
   color: #fff; /* Tekstin väri */
   overflow: hidden;
+  padding: 0 20%; /* Varmistaa 20% tyhjän tilan molemmilla puolilla */
 }
 
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Säätää taustakuvan läpinäkyvyyttä */
+  backdrop-filter: blur(8px); /* Sumennus taustakuvaan */
+  z-index: 1;
+}
 
 header h1 {
   position: relative;
@@ -30,13 +42,11 @@ header h1 {
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
   letter-spacing: 2px;
-  width: 60%; /* Leveys */
-  max-width: 60%;
+  width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
   color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
-  padding: 0 20%; /* Varmistaa 20% tyhjän tilan molemmilla puolilla */
 }
-https://chatgpt.com/c/63b18f8c-e2a2-4f65-845e-f1e619fdedb1
+
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   header {
@@ -61,6 +71,7 @@ https://chatgpt.com/c/63b18f8c-e2a2-4f65-845e-f1e619fdedb1
 main {
   padding: 20px;
 }
+
 
 
 
