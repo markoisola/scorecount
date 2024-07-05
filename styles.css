@@ -1,3 +1,4 @@
+/* Kehon perusasetukset */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
@@ -5,239 +6,117 @@ body {
   padding: 0;
 }
 
+/* Header-asetukset */
 header {
-  background-color: #333;
-  color: #fff;
+  background-image: url('images/header_background_pic.jpg'); /* Varmista, että tämä polku on oikein */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 20vh; /* Korkeus 20% näkymän korkeudesta */
+  display: flex; /* Flexbox keskittämistä varten */
+  align-items: center; /* Keskittää sisällön pystysuunnassa */
+  justify-content: center; /* Keskittää sisällön vaakasuunnassa */
   text-align: center;
-  padding: 10px 0;
+  position: relative; /* Tarvitaan pseudo-elementtiä varten */
+  overflow: hidden;
+  padding: 0 20%; /* Varmistaa 20% tyhjän tilan molemmilla puolilla */
 }
 
+/* Headerin pseudo-elementti */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Vähentää taustakuvan läpinäkyvyyttä */
+  backdrop-filter: blur(4px); /* Sumennus taustakuvaan */
+  z-index: 1; /* Asettaa pseudo-elementin tekstin taakse */
+}
+
+/* Headerin tekstin asetukset */
+header h1 {
+  position: relative;
+  z-index: 2; /* Asettaa tekstin pseudo-elementin päälle */
+  margin: 0;
+  font-size: calc(3rem + 5vw); /* Skaalautuva fonttikoko */
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.8); /* Läpinäkyvä teksti */
+}
+
+/* Main-asetukset */
 main {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding: 0 10px;
+  padding: 20px;
 }
 
+/* Sivupalkin ja pääsisällön asettelu */
 aside {
-  flex: 1 1 200px;
-  padding: 10px;
-}
-
-#league-details, #standings-section {
-  flex: 2 1 600px;
-  padding: 10px;
-  margin: 0 10px;
-}
-
-#standings-sidebar {
-  flex: 1 1 300px;
+  width: 20%;
   padding: 10px;
 }
 
 section {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  width: 75%;
   padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+#standings-section {
+  width: 100%;
+  padding: 10px;
 }
 
+#standings-sidebar {
+  width: 100%;
+  padding: 10px;
+}
+
+/* Syötekentän tyylit */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+}
+
+/* Nappien perusasetukset */
 button {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  padding: 10px 20px;
   margin-top: 10px;
+  color: #fff;
+  background-color: #4CAF50; /* Vihreä väri */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #45a049; /* Tummempi vihreä hover-tila */
 }
 
-#leagues-buttons button {
-  display: block;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.match {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.match-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  padding-right: 10px;
-}
-
-.match-info span {
-  flex-basis: 33%;
-  text-align: center;
-}
-
-.match-buttons {
-  display: flex;
-  gap: 10px;
-  padding-left: 10px;
-}
-
-.standings {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding-top: 10px;
-}
-
-.standings-container {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.standings-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.standings-table th, .standings-table td {
-  text-align: center;
-  padding: 5px;
-}
-
-.standings-table th {
-  font-weight: bold;
-}
-
-.standings-table .team-name {
-  text-align: center;
-  width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.result-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.result-form input {
-  width: 50px;
-}
-
-.result-form button {
-  margin-left: 10px;
-}
-
-button.edit {
-  background-color: #ffa500;
-  color: #fff;
-  font-size: 0.8em;
-  padding: 3px 6px;
-}
-
-button.delete {
-  background-color: #ff0000;
-  color: #fff;
-  font-size: 0.8em;
-  padding: 3px 6px;
-}
-
-button.add-result {
-  background-color: #007bff;
-  color: #fff;
-  font-size: 0.8em;
-  padding: 3px 6px;
-}
-
+/* Tallenna- ja nollaa-nappien asettelu */
 #save-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#save-button:hover {
-  background-color: #218838;
+  background-color: green;
+  color: white;
 }
 
 #reset-button {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#reset-button:hover {
-  background-color: #cc0000;
-}
-
-.table-row {
-  border-bottom: 1px solid #ccc;
-}
-
-.table-row:last-child {
-  border-bottom: none;
-}
-
-@media (max-width: 768px) {
-  #league-details, #standings-section, #standings-sidebar {
-    flex: 1 1 100%;
-    margin: 10px 0;
-  }
-
-  .match-info span {
-    flex-basis: 30%;
-  }
-}
-
-@media (max-width: 480px) {
-  .match-info span {
-    flex-basis: 28%;
-  }
-
-  .match-info span.score {
-    flex-basis: 14%;
-  }
-
-  button {
-    padding: 3px 5px;
-    font-size: 0.8em;
-  }
+  background-color: red;
+  color: white;
 }
