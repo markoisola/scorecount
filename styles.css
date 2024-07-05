@@ -1,311 +1,82 @@
-/* Resetting default margins and paddings */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Basic body styling */
+/* Kehon perusasetukset */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
+  font-family: Arial, sans-serif;
+  background-image: url('images/new_background_pic.jpg'); /* Uusi taustakuva kaikille muille osille paitsi headerille */
+  background-size: cover; /* Varmistaa, että taustakuva peittää koko näkymän */
+  background-position: center; /* Keskittää taustakuvan */
+  background-repeat: no-repeat; /* Estää taustakuvan toistumisen */
+  margin: 0;
+  padding: 0;
 }
 
-/* Background image for the rest of the page */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('images/background.jpg') no-repeat center center fixed; /* Korvaa 'images/background.jpg' oman kuvasi polulla */
-    background-size: cover;
-    filter: blur(5px); /* Sumeus */
-    opacity: 0.1; /* Säädä läpinäkyvyyttä tässä */
-    z-index: -1; /* Aseta taustakuva alimmaiseksi */
-}
-
-/* Styling for the header */
+/* Header-asetukset */
 header {
-    height: 300px; /* Aseta headerin korkeus tarpeen mukaan */
-    background: url('images/header_background_pic.jpg') no-repeat center center; /* Korvaa 'images/header_background_pic.jpg' oman kuvasi polulla */
-    background-size: cover;
-    color: white; /* Tekstin väri */
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-image: url('images/header_background_pic.jpg'); /* Headerin oma taustakuva */
+  background-size: cover; /* Varmistaa, että taustakuva peittää koko headerin */
+  background-position: center; /* Keskittää taustakuvan */
+  background-repeat: no-repeat; /* Estää taustakuvan toistumisen */
+  height: 30vh; /* Korkeus 30% näkymän korkeudesta */
+  display: flex; /* Flexbox keskittämistä varten */
+  align-items: center; /* Keskittää sisällön pystysuunnassa */
+  justify-content: center; /* Keskittää sisällön vaakasuunnassa */
+  text-align: center;
+  position: relative; /* Tarvitaan pseudo-elementtiä varten */
+  overflow: hidden;
+  padding: 0 10%; /* 10% tyhjää tilaa molemmilla puolilla */
 }
 
+/* Headerin pseudo-elementti */
 header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Läpinäkyvä kerros sumeuden päälle */
-    z-index: 1; /* Aseta läpinäkyvä kerros taustalle */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Vähentää taustakuvan läpinäkyvyyttä */
+  backdrop-filter: blur(2px); /* Vähentää sumennusta taustakuvaan */
+  z-index: 1; /* Asettaa pseudo-elementin tekstin taakse */
 }
 
+/* Headerin tekstin asetukset */
 header h1 {
-    position: relative;
-    z-index: 2;
-    margin: 0;
-    padding: 0 20%;
-    background: rgba(0, 0, 0, 0.5); /* Läpinäkyvä tausta tekstille */
-    border-radius: 10px;
+  position: relative;
+  z-index: 2; /* Asettaa tekstin pseudo-elementin päälle */
+  margin: 0;
+  font-size: calc(3rem + 5vw); /* Skaalautuva fonttikoko */
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
+  letter-spacing: 2px;
+  width: 100%; /* Leveys */
+  text-align: center; /* Keskittää tekstin */
+  color: rgba(255, 255, 255, 0.5); /* Läpinäkyvä teksti */
 }
 
-/* Styling for the main content area */
+/* Main-asetukset */
 main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding: 0 10px;
-    position: relative;
-    z-index: 1;
+  padding: 20px;
 }
 
-aside {
-    flex: 1 1 200px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
-}
-
-#league-details, #standings-section {
-    flex: 2 1 600px;
-    padding: 10px;
-    margin: 0 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
-}
-
-#standings-sidebar {
-    flex: 1 1 300px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
-}
-
-section {
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#leagues-buttons button {
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-.match {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.match-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-    padding-right: 10px;
-}
-
-.match-info span {
-    flex-basis: 33%;
-    text-align: center;
-}
-
-.match-buttons {
-    display: flex;
-    gap: 10px;
-    padding-left: 10px;
-}
-
-.standings {
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-}
-
-.standings-container {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.standings-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.standings-table th, .standings-table td {
-    text-align: center;
-    padding: 5px;
-}
-
-.standings-table th {
-    font-weight: bold;
-}
-
-.standings-table .team-name {
-    text-align: center;
-    width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.result-form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.result-form input {
-    width: 50px;
-}
-
-.result-form button {
-    margin-left: 10px;
-}
-
-button.edit {
-    background-color: #ffa500;
-    color: #fff;
-    font-size: 0.8em;
-    padding: 3px 6px;
-}
-
-button.delete {
-    background-color: #ff0000;
-    color: #fff;
-    font-size: 0.8em;
-    padding: 3px 6px;
-}
-
-button.add-result {
-    background-color: #007bff;
-    color: #fff;
-    font-size: 0.8em;
-    padding: 3px 6px;
-}
-
-#save-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#save-button:hover {
-    background-color: #218838;
-}
-
-#reset-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background-color: #ff0000;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#reset-button:hover {
-    background-color: #cc0000;
-}
-
-.table-row {
-    border-bottom: 1px solid #ccc;
-}
-
-.table-row:last-child {
-    border-bottom: none;
-}
-
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
-    #league-details, #standings-section, #standings-sidebar {
-        flex: 1 1 100%;
-        margin: 10px 0;
-    }
+  header {
+    height: 25vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
+    padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
+  }
 
-    .match-info span {
-        flex-basis: 30%;
-    }
+  header h1 {
+    font-size: calc(2.5rem + 6vw); /* Suurempi fonttikoko pienemmillä näytöillä */
+  }
 }
 
 @media (max-width: 480px) {
-    header {
-        height: 20vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
-        padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
-    }
+  header {
+    height: 20vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
+    padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
+  }
 
-    header h1 {
-        font-size: calc(1.5rem + 5vw); /* Suurempi fonttikoko vielä pienemmillä näytöillä */
-    }
-
-    .match-info span {
-        flex-basis: 28%;
-    }
-
-    .match-info span.score {
-        flex-basis: 14%;
-    }
-
-    button {
-        padding: 3px 5px;
-        font-size: 0.8em;
-    }
+  header h1 {
+    font-size: calc(2rem + 7vw); /* Suurempi fonttikoko vielä pienemmillä näytöillä */
+  }
 }
