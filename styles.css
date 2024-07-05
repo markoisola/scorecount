@@ -36,7 +36,7 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: calc(2rem + 2vw); /* Suurempi skaalaava fonttikoko */
+  font-size: calc(4rem + 3vw); /* Suurempi skaalaava fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
