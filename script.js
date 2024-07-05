@@ -69,8 +69,8 @@ function lockLeague(index) {
 // Lisää ottelu sarjaan
 function addMatch(index) {
   const match = {
-    team1: document.getElementById(`team1-${index}`).value,
-    team2: document.getElementById(`team2-${index}`).value,
+    team1: leagues[index].teams[0].name,
+    team2: leagues[index].teams[1].name,
     score1: 0,
     score2: 0,
   };
