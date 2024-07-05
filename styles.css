@@ -24,7 +24,7 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: calc(1.5rem + 2vw); /* Skaalautuva fonttikoko */
+  font-size: calc(2rem + 3vw); /* Skaalautuva fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
