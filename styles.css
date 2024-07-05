@@ -5,8 +5,7 @@ body {
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background: url('images/background.jpg') no-repeat center center fixed;
-	background-size: cover;
+    background: none;
 }
 
 /* Resetting default margins and paddings */
