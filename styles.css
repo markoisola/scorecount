@@ -1,11 +1,12 @@
 body {
   font-family: Arial, sans-serif;
+  background url('images/background.jpg');
   margin: 0;
   padding: 0;
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  background: url('images/background.jpg);
+  background-size: cover;
 }
 
 header {
