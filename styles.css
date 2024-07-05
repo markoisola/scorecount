@@ -191,6 +191,23 @@ button.add-result {
   background-color: #218838;
 }
 
+#reset-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#reset-button:hover {
+  background-color: #cc0000;
+}
+
 .table-row {
   border-bottom: 1px solid #ccc;
 }
