@@ -8,7 +8,6 @@ body {
   padding: 0;
 }
 
-/* Header-asetukset */
 header {
   background-image: url('images/header_background_pic.jpg'); /* Headerin oma taustakuva */
   background-size: cover; /* Varmistaa, että taustakuva peittää koko headerin */
@@ -24,7 +23,6 @@ header {
   padding: 0 10%; /* 10% tyhjää tilaa molemmilla puolilla */
 }
 
-/* Headerin pseudo-elementti */
 header::before {
   content: '';
   position: absolute;
@@ -37,7 +35,6 @@ header::before {
   z-index: 1; /* Asettaa pseudo-elementin tekstin taakse */
 }
 
-/* Headerin tekstin asetukset */
 header h1 {
   position: relative;
   z-index: 2; /* Asettaa tekstin pseudo-elementin päälle */
@@ -50,34 +47,6 @@ header h1 {
   width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
   color: rgba(255, 255, 255, 0.5); /* Läpinäkyvä teksti */
-}
-
-/* Main-asetukset */
-main {
-  padding: 20px;
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  header {
-    height: 25vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
-    padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
-  }
-
-  header h1 {
-    font-size: calc(2.5rem + 6vw); /* Suurempi fonttikoko pienemmillä näytöillä */
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    height: 20vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
-    padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
-  }
-
-  header h1 {
-    font-size: calc(2rem + 7vw); /* Suurempi fonttikoko vielä pienemmillä näytöillä */
-  }
 }
 
 main {
