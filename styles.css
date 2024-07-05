@@ -24,11 +24,14 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 250px; /* Isompi fonttikoko */
-  font-family: 'Arial', sans-serif; /* Voit valita myös muun fontin, esim. Google Fontsista */
+  font-size: 80px; /* Isompi fonttikoko */
+  font-family: 'Arial', sans-serif;
   font-weight: bold;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Tekstin varjo */
-  letter-spacing: 10px; /* Välit kirjainten välillä */
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
+  letter-spacing: 2px;
+  width: 100%; /* Leveys */
+  text-align: center; /* Keskittää tekstin */
+  opacity: 0.8; /* Läpinäkyvä teksti */
 }
 
 
