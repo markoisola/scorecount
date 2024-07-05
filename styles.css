@@ -5,37 +5,33 @@ body {
   padding: 0;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
 header {
-  header {
-  background-image: url('/images/header_background_pic.jpg');
+  background-image: url('path/to/your/image.jpg'); /* Vaihda tähän oman kuvasi polku */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: relative;
   height: 200px; /* Voit säätää korkeutta tarpeen mukaan */
   color: #fff; /* Tekstin väri */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Säätää taustakuvan läpinäkyvyyttä */
-  z-index: 1;
+  opacity: 0.9; /* Säätää taustakuvan läpinäkyvyyttä */
 }
 
 header h1 {
-  position: relative;
-  z-index: 2;
   margin: 0;
 }
+
+/* Muu CSS koodi */
+
 
 
 main {
