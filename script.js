@@ -5,7 +5,7 @@ function createLeague() {
     alert('Syötä sarjan nimi');
     return;
   }
-  
+
   // Luodaan uusi sarja-objekti
   const league = {
     name: leagueName,
@@ -13,12 +13,12 @@ function createLeague() {
     matches: [],
     locked: false
   };
-  
+
   // Tallennetaan sarja paikalliseen tallennustilaan
   let leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   leagues.push(league);
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   // Päivitetään sivun näkymä
   displayLeagues();
   document.getElementById('league-name').value = '';
@@ -29,7 +29,7 @@ function displayLeagues() {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const leaguesButtons = document.getElementById('leagues-buttons');
   leaguesButtons.innerHTML = '';
-  
+
   leagues.forEach((league, index) => {
     const button = document.createElement('button');
     button.textContent = league.name;
@@ -51,28 +51,28 @@ function showLeagueDetails(index) {
 
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[index];
-  
+
   const leagueDetailsSection = document.getElementById('league-details');
   leagueDetailsSection.innerHTML = '';
-  
+
   const h2 = document.createElement('h2');
   h2.textContent = selectedLeague.name;
   leagueDetailsSection.appendChild(h2);
-  
+
   if (!selectedLeague.locked) {
     const teamInput = document.createElement('input');
     teamInput.setAttribute('type', 'text');
     teamInput.setAttribute('id', 'team-name');
     teamInput.setAttribute('placeholder', 'Joukkueen nimi');
     leagueDetailsSection.appendChild(teamInput);
-    
+
     const addTeamButton = document.createElement('button');
     addTeamButton.textContent = 'Lisää joukkue';
     addTeamButton.onclick = () => {
       addTeam(index);
     };
     leagueDetailsSection.appendChild(addTeamButton);
-    
+
     const lockLeagueButton = document.createElement('button');
     lockLeagueButton.textContent = 'Sarja valmis';
     lockLeagueButton.onclick = () => {
@@ -80,7 +80,7 @@ function showLeagueDetails(index) {
     };
     leagueDetailsSection.appendChild(lockLeagueButton);
   }
-  
+
   const teamsList = document.createElement('ul');
   selectedLeague.teams.forEach(team => {
     const li = document.createElement('li');
@@ -89,7 +89,7 @@ function showLeagueDetails(index) {
     teamsList.appendChild(li);
   });
   leagueDetailsSection.appendChild(teamsList);
-  
+
   if (selectedLeague.locked) {
     const addMatchButton = document.createElement('button');
     addMatchButton.textContent = 'Lisää ottelu';
@@ -97,12 +97,12 @@ function showLeagueDetails(index) {
       showAddMatchForm(index);
     };
     leagueDetailsSection.appendChild(addMatchButton);
-    
+
     const matchesList = document.createElement('div');
     selectedLeague.matches.forEach((match, matchIndex) => {
       const matchDiv = document.createElement('div');
       matchDiv.className = 'match';
-      
+
       let team1Style = '';
       let team2Style = '';
       let score1Style = '';
@@ -116,7 +116,7 @@ function showLeagueDetails(index) {
           score2Style = 'font-weight: bold;';
         }
       }
-      
+
       matchDiv.innerHTML = `
         <div class="match-info">
           <span class="team-name" style="${team1Style}">${shortenName(match.team1)}</span>
@@ -137,7 +137,7 @@ function showLeagueDetails(index) {
       matchesList.appendChild(matchDiv);
     });
     leagueDetailsSection.appendChild(matchesList);
-    
+
     displayStandings(selectedLeague);
   }
 }
@@ -157,11 +157,11 @@ function addTeam(index) {
     alert('Syötä joukkueen nimi');
     return;
   }
-  
+
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   leagues[index].teams.push({ name: teamName });
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   showLeagueDetails(index);
 }
 
@@ -170,7 +170,7 @@ function lockLeague(index) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   leagues[index].locked = true;
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   showLeagueDetails(index);
   displayStandings(leagues[index]);
 }
@@ -179,7 +179,7 @@ function lockLeague(index) {
 function showAddMatchForm(index) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[index];
-  
+
   const form = document.createElement('div');
   form.innerHTML = `
     <select id="team1-select">
@@ -190,23 +190,23 @@ function showAddMatchForm(index) {
     </select>
     <button onclick="addMatch(${index})">Luo ottelu</button>
   `;
-  
+
   document.getElementById('league-details').appendChild(form);
 }
 
 function addMatch(index) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[index];
-  
+
   const team1 = document.getElementById('team1-select').value;
   const team2 = document.getElementById('team2-select').value;
-  
+
   selectedLeague.matches.push({
     team1: team1,
     team2: team2
   });
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   showLeagueDetails(index);
 }
 
@@ -215,7 +215,7 @@ function editMatch(leagueIndex, matchIndex) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[leagueIndex];
   const match = selectedLeague.matches[matchIndex];
-  
+
   const form = document.createElement('div');
   form.innerHTML = `
     <select id="team1-select-edit">
@@ -226,7 +226,7 @@ function editMatch(leagueIndex, matchIndex) {
     </select>
     <button onclick="updateMatch(${leagueIndex}, ${matchIndex})">Tallenna</button>
   `;
-  
+
   document.getElementById(`result-${leagueIndex}-${matchIndex}`).appendChild(form);
 }
 
@@ -234,12 +234,12 @@ function updateMatch(leagueIndex, matchIndex) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[leagueIndex];
   const match = selectedLeague.matches[matchIndex];
-  
+
   match.team1 = document.getElementById('team1-select-edit').value;
   match.team2 = document.getElementById('team2-select-edit').value;
-  
+
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   showLeagueDetails(leagueIndex);
 }
 
@@ -247,10 +247,10 @@ function updateMatch(leagueIndex, matchIndex) {
 function deleteMatch(leagueIndex, matchIndex) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[leagueIndex];
-  
+
   selectedLeague.matches.splice(matchIndex, 1);
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   showLeagueDetails(leagueIndex);
   displayStandings(selectedLeague);
 }
@@ -264,7 +264,7 @@ function showAddResultForm(leagueIndex, matchIndex) {
     <input type="number" id="score2-${leagueIndex}-${matchIndex}" placeholder="Pisteet joukkue 2">
     <button onclick="addResult(${leagueIndex}, ${matchIndex})">Lisää tulos</button>
   `;
-  
+
   document.getElementById(`result-${leagueIndex}-${matchIndex}`).appendChild(form);
 }
 
@@ -272,12 +272,12 @@ function addResult(leagueIndex, matchIndex) {
   const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
   const selectedLeague = leagues[leagueIndex];
   const match = selectedLeague.matches[matchIndex];
-  
+
   match.score1 = parseInt(document.getElementById(`score1-${leagueIndex}-${matchIndex}`).value, 10);
   match.score2 = parseInt(document.getElementById(`score2-${leagueIndex}-${matchIndex}`).value, 10);
-  
+
   localStorage.setItem('leagues', JSON.stringify(leagues));
-  
+
   showLeagueDetails(leagueIndex);
   displayStandings(selectedLeague);
 }
@@ -288,19 +288,20 @@ function calculateStandings(league) {
     name: team.name,
     points: 0,
     scored: 0,
-    conceded: 0
+    conceded: 0,
+    ko: ''
   }));
-  
+
   league.matches.forEach(match => {
     const team1 = standings.find(team => team.name === match.team1);
     const team2 = standings.find(team => team.name === match.team2);
-    
+
     if (match.score1 !== undefined && match.score2 !== undefined) {
       team1.scored += match.score1;
       team1.conceded += match.score2;
       team2.scored += match.score2;
       team2.conceded += match.score1;
-      
+
       if (match.score1 > match.score2) {
         team1.points += 2;
       } else {
@@ -308,7 +309,37 @@ function calculateStandings(league) {
       }
     }
   });
-  
+
+  // Tarkista, onko kaikki joukkueet pelanneet keskenään
+  const totalMatches = league.teams.length * (league.teams.length - 1) / 2;
+  const allMatchesPlayed = league.matches.length === totalMatches;
+
+  standings.sort((a, b) => {
+    if (b.points !== a.points) return b.points - a.points;
+    if (allMatchesPlayed) {
+      const match = league.matches.find(match => (match.team1 === a.name && match.team2 === b.name) || (match.team1 === b.name && match.team2 === a.name));
+      if (match) {
+        if (match.score1 > match.score2) return match.team1 === a.name ? -1 : 1;
+        if (match.score2 > match.score1) return match.team2 === a.name ? -1 : 1;
+      }
+    }
+    return 0;
+  });
+
+  if (allMatchesPlayed) {
+    standings.forEach((team, index) => {
+      if (index > 0 && team.points === standings[index - 1].points) {
+        const previousTeam = standings[index - 1];
+        const match = league.matches.find(match => (match.team1 === team.name && match.team2 === previousTeam.name) || (match.team1 === previousTeam.name && match.team2 === team.name));
+        if (match) {
+          if (match.score1 > match.score2 && match.team1 === team.name || match.score2 > match.score1 && match.team2 === team.name) {
+            team.ko = ' KO';
+          }
+        }
+      }
+    });
+  }
+
   return standings;
 }
 
@@ -316,7 +347,7 @@ function displayStandings(league) {
   const standings = calculateStandings(league);
   const standingsDiv = document.getElementById('standings');
   standingsDiv.innerHTML = '';
-  
+
   const table = document.createElement('table');
   table.className = 'standings-table';
   table.innerHTML = `
@@ -325,17 +356,17 @@ function displayStandings(league) {
       <th>Pisteet</th>
     </tr>
   `;
-  
+
   standings.forEach(team => {
     const row = document.createElement('tr');
     row.className = 'table-row';
     row.innerHTML = `
       <td class="team-name">${shortenName(team.name)}</td>
-      <td class="points">${team.points}</td>
+      <td class="points">${team.points}${team.ko}</td>
     `;
     table.appendChild(row);
   });
-  
+
   const standingsContainer = document.createElement('div');
   standingsContainer.className = 'standings-container';
   standingsContainer.appendChild(table);
@@ -370,7 +401,7 @@ function displayAllStandings() {
       <tr>
         <th>Joukkue</th>
         <th>Pisteet</th>
-        <th>Piste-ero</th>
+        <th></th>
       </tr>
     `;
 
@@ -379,7 +410,7 @@ function displayAllStandings() {
       row.className = 'table-row';
       row.innerHTML = `
         <td class="team-name">${shortenName(team.name)}</td>
-        <td class="points">${team.points}</td>
+        <td class="points">${team.points}${team.ko}</td>
         <td class="goal-difference">${team.scored} : ${team.conceded}</td>
       `;
       table.appendChild(row);
