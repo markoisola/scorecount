@@ -34,6 +34,11 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
+  font-size: 48px; /* Isompi fonttikoko */
+  font-family: 'Arial', sans-serif; /* Voit valita myös muun fontin, esim. Google Fontsista */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Tekstin varjo */
+  letter-spacing: 2px; /* Välit kirjainten välillä */
 }
 
 
