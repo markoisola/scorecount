@@ -13,58 +13,74 @@ body {
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background: url('images/second-background.jpg') no-repeat center center fixed; /* Replace with your background image path */
-    background-size: cover;
+    background-color: #333; /* Set the background color to dark gray */
+    color: white; /* Set the text color to white for better readability */
 }
 
 /* Styling for the header */
 header {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    z-index: 1;
+    height: 300px; /* Set the height of the header */
+    background-color: #333; /* Set the background color of the header to match the body */
+    color: white; /* Set the text color of the header */
+    text-align: center; /* Center align the text */
+    padding: 20px; /* Add padding to the header */
 }
 
-/* Additional content and button styling */
+header h1, header nav {
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Styling for the main content area */
 main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 20px;
     padding: 0 10px;
-    position: relative;
-    z-index: 1;
-    background: none; /* Ensure main background is transparent */
 }
 
 aside {
     flex: 1 1 200px;
     padding: 10px;
-    background: none; /* Ensure aside background is transparent */
+    background-color: #444; /* Set a slightly lighter gray background for aside */
 }
 
 #league-details, #standings-section {
     flex: 2 1 600px;
     padding: 10px;
     margin: 0 10px;
-    background: none; /* Ensure sections background is transparent */
+    background-color: #444; /* Set a slightly lighter gray background for sections */
 }
 
 #standings-sidebar {
     flex: 1 1 300px;
     padding: 10px;
-    background: none; /* Ensure aside background is transparent */
+    background-color: #444; /* Set a slightly lighter gray background for aside */
 }
 
 section {
+    background-color: #444; /* Set a slightly lighter gray background for sections */
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: none; /* Ensure sections background is transparent */
 }
 
 ul {
@@ -97,7 +113,7 @@ button:hover {
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ccc;
-    background-color: transparent; /* Make sure match elements are transparent */
+    background-color: #555; /* Set a slightly lighter gray background for match */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -135,8 +151,8 @@ button:hover {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    background-color: #555; /* Set a slightly lighter gray background for standings-container */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: none; /* Ensure container background is transparent */
 }
 
 .standings-table {
