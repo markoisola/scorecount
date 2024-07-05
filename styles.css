@@ -31,7 +31,7 @@ header h1 {
   letter-spacing: 10px;
   width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
-  color: rgba(255, 255, 255, 0.2); /* Läpinäkyvä teksti */
+  color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
 }
 
 
