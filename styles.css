@@ -10,29 +10,63 @@ header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 200px; /* Voit säätää korkeutta tarpeen mukaan */
+  height: 50vh; /* Korkeus 50% näkymän korkeudesta */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
   color: #fff; /* Tekstin väri */
+  overflow: hidden;
 }
 
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Säätää taustakuvan läpinäkyvyyttä */
+  backdrop-filter: blur(8px); /* Sumennus taustakuvaan */
+  z-index: 1;
+}
 
 header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 250px; /* Isompi fonttikoko */
+  font-size: 5vw; /* Skaalautuva fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  text-shadow: 5px 5px 7px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
-  letter-spacing: 10px;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
+  letter-spacing: 2px;
   width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
-  color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
+  color: rgba(255, 255, 255, 0.8); /* Läpinäkyvä teksti */
 }
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  header {
+    height: 40vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
+  }
+
+  header h1 {
+    font-size: 7vw; /* Suurempi fonttikoko pienemmillä näytöillä */
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 30vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
+  }
+
+  header h1 {
+    font-size: 8vw; /* Suurempi fonttikoko vielä pienemmillä näytöillä */
+  }
+}
+
 
 
 main {
