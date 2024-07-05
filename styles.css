@@ -12,26 +12,36 @@ body {
     padding: 0;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Background image for the rest of the page */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: url('images/background.jpg') no-repeat center center fixed; /* Korvaa 'images/background.jpg' oman kuvasi polulla */
     background-size: cover;
-    background-color: #333; /* Set the background color to dark gray as a fallback */
-    color: white; /* Set text color to white for better readability */
+    filter: blur(5px); /* Sumeus */
+    opacity: 0.1; /* Säädä läpinäkyvyyttä tässä */
+    z-index: -1; /* Aseta taustakuva alimmaiseksi */
 }
 
 /* Styling for the header */
 header {
     height: 300px; /* Aseta headerin korkeus tarpeen mukaan */
-    background: url('images/header-background.jpg') no-repeat center center; /* Korvaa 'images/header-background.jpg' oman kuvasi polulla */
+    background: url('images/header_background_pic.jpg') no-repeat center center; /* Korvaa 'images/header_background_pic.jpg' oman kuvasi polulla */
     background-size: cover;
     color: white; /* Tekstin väri */
     text-align: center;
     padding: 20px;
     position: relative;
-    z-index: 2; /* Varmistaa, että header on taustakuvan päällä */
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: blur(5px); /* Sumeus */
 }
 
 header::before {
@@ -42,10 +52,12 @@ header::before {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Läpinäkyvä kerros sumeuden päälle */
-    z-index: -1; /* Aseta läpinäkyvä kerros taustalle */
+    z-index: 1; /* Aseta läpinäkyvä kerros taustalle */
 }
 
 header h1 {
+    position: relative;
+    z-index: 2;
     margin: 0;
     padding: 0 20%;
     background: rgba(0, 0, 0, 0.5); /* Läpinäkyvä tausta tekstille */
@@ -59,6 +71,8 @@ main {
     justify-content: space-between;
     margin-top: 20px;
     padding: 0 10px;
+    position: relative;
+    z-index: 1;
 }
 
 aside {
