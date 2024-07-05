@@ -42,14 +42,14 @@ header h1 {
   position: relative;
   z-index: 2; /* Asettaa tekstin pseudo-elementin päälle */
   margin: 0;
-  font-size: calc(4rem + 5vw); /* Skaalautuva fonttikoko */
+  font-size: calc(3rem + 5vw); /* Skaalautuva fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
   letter-spacing: 2px;
   width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
-  color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
+  color: rgba(255, 255, 255, 0.5); /* Läpinäkyvä teksti */
 }
 
 /* Main-asetukset */
