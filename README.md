@@ -1,0 +1,2 @@
+# scorecount
+Tournament score tracking
