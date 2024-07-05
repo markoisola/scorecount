@@ -28,7 +28,7 @@ header::before {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3); /* Vähennetään taustakuvan läpinäkyvyyttä */
-  backdrop-filter: blur(4px); /* Vähennetään sumennusta taustakuvaan */
+  backdrop-filter: blur(2px); /* Vähennetään sumennusta taustakuvaan */
   z-index: 1;
 }
 
