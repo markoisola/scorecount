@@ -37,11 +37,11 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 5vw; /* Skaalautuva fonttikoko */
+  font-size: 7vw; /* Skaalautuva fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
-  letter-spacing: 2px;
+  letter-spacing: 6px;
   width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
   color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
