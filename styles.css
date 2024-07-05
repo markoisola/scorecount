@@ -88,16 +88,18 @@ input[type="text"] {
 /* Nappien perusasetukset */
 button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 15px; /* Tasataan napit neliön muotoisiksi */
   margin-top: 10px;
   color: #fff;
   background-color: #4CAF50; /* Vihreä väri */
   border: none;
-  border-radius: 25px;
+  border-radius: 15px; /* Pyöristetyt kulmat */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  width: 100px; /* Nappi neliön muotoiseksi */
+  height: 100px; /* Nappi neliön muotoiseksi */
 }
 
 button:hover {
@@ -111,6 +113,8 @@ button:hover {
   right: 20px;
   background-color: green;
   color: white;
+  width: auto; /* Palauttaa nollaa ja tallenna napin leveyden automaattiseksi */
+  height: auto; /* Palauttaa nollaa ja tallenna napin korkeuden automaattiseksi */
 }
 
 #reset-button {
@@ -119,4 +123,6 @@ button:hover {
   left: 20px;
   background-color: red;
   color: white;
+  width: auto; /* Palauttaa nollaa ja tallenna napin leveyden automaattiseksi */
+  height: auto; /* Palauttaa nollaa ja tallenna napin korkeuden automaattiseksi */
 }
