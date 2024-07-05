@@ -18,6 +18,7 @@ header {
   position: relative;
   color: #fff; /* Tekstin väri */
   overflow: hidden;
+  padding: 0 20%; /* Lisätään vaakasuuntainen padding */
 }
 
 header::before {
@@ -36,42 +37,16 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: clamp(24px, 5vw, 48px); /* Skaalautuva fonttikoko min 24px, max 48px */
+  font-size: 5vw; /* Skaalautuva fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
   letter-spacing: 2px;
   width: 100%; /* Leveys */
   text-align: center; /* Keskittää tekstin */
-  color: rgba(255, 255, 255, 0.8); /* Läpinäkyvä teksti */
-  padding: 0 20px; /* Lisää paddingia reunoihin */
+  color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
+  max-width: 60%; /* Maksimileveys tekstille */
 }
-
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  header {
-    height: 40vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
-  }
-
-  header h1 {
-    font-size: clamp(20px, 7vw, 40px); /* Suurempi fonttikoko pienemmillä näytöillä */
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    height: 30vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
-  }
-
-  header h1 {
-    font-size: clamp(18px, 8vw, 36px); /* Suurempi fonttikoko vielä pienemmillä näytöillä */
-  }
-}
-
-main {
-  padding: 20px;
-}
-
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
