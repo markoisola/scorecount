@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koripalloturnauksen hallinta</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>ScoreCount</h1>
+  </header>
+  
+  <main>
+    <aside>
+      <section id="create-league">
+        <h2>Luo uusi sarja</h2>
+        <input type="text" id="league-name" placeholder="Sarjan nimi">
+        <button onclick="createLeague()">Luo sarja</button>
+      </section>
+      
+      <section id="leagues-sidebar">
+        <h2>Aktiiviset sarjat</h2>
+        <div id="leagues-buttons"></div>
+        <button onclick="showAllStandings()">Sarjataulukot</button>
+      </section>
+    </aside>
+    
+    <section id="league-details">
+      <!-- Sarjan tietojen näyttö -->
+    </section>
+    
+    <section id="standings-section" style="display:none;">
+      <h2>Kaikki sarjataulukot</h2>
+      <div id="all-standings"></div>
+    </section>
+    
+    <aside id="standings-sidebar" style="display:none;">
+      <h2>Pistetilanne</h2>
+      <div id="standings"></div>
+    </aside>
+  </main>
+  
+  <button id="save-button" onclick="saveData()">Tallenna</button>
+  
+  <script src="script.js"></script>
+</body>
+</html>
