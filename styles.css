@@ -10,7 +10,7 @@ header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 300px; /* Voit säätää korkeutta tarpeen mukaan */
+  height: 200px; /* Voit säätää korkeutta tarpeen mukaan */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,11 +24,11 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 100px; /* Isompi fonttikoko */
+  font-size: 200px; /* Isompi fonttikoko */
   font-family: 'Arial', sans-serif; /* Voit valita myös muun fontin, esim. Google Fontsista */
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Tekstin varjo */
-  letter-spacing: 4px; /* Välit kirjainten välillä */
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Tekstin varjo */
+  letter-spacing: 8px; /* Välit kirjainten välillä */
 }
 
 
