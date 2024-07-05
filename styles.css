@@ -4,64 +4,6 @@ body {
   margin: 0;
   padding: 0;
 }
-/* Header osio */
-.header {
-    height: 300px; /* Aseta headerin korkeus tarpeen mukaan */
-    background-color: #333; /* Headerin taustaväri */
-    color: white; /* Tekstin väri */
-    text-align: center;
-    padding: 20px;
-}
-
-.header h1, .header nav {
-    margin: 0;
-    padding: 0;
-}
-
-.header nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.header nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-.header nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-/* Sivun sisältö ja taustakuva */
-body {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-.content {
-    position: relative;
-    z-index: 1; /* Varmistaa, että sisältö on taustakuvan päällä */
-    padding: 20px;
-}
-
-/* Taustakuva muuhun osaan sivua */
-body::before {
-    content: "";
-    position: fixed;
-    top: 300px; /* Tämä asetus varmistaa, että taustakuva alkaa headerin jälkeen */
-    left: 0;
-    width: 100%;
-    height: calc(100% - 300px); /* Varmistaa, että taustakuva kattaa koko loppuosan sivusta */
-    background-image: url('taustakuva.jpg'); /* Korvaa 'taustakuva.jpg' oman kuvasi polulla */
-    background-size: cover;
-    background-position: center;
-    opacity: 0.1; /* Säädä läpinäkyvyyttä tässä */
-    z-index: -1; /* Aseta taustakuva alimmaiseksi */
-}
 
 
 @media (max-width: 480px) {
