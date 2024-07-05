@@ -82,7 +82,7 @@ input[type="text"] {
   margin: 10px 0;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 /* Nappien perusasetukset */
@@ -93,7 +93,7 @@ button {
   color: #fff;
   background-color: #4CAF50; /* Vihreä väri */
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -111,6 +111,7 @@ button:hover {
   right: 20px;
   background-color: green;
   color: white;
+  border-radius: 10px;
 }
 
 #reset-button {
@@ -119,4 +120,21 @@ button:hover {
   left: 20px;
   background-color: red;
   color: white;
+  border-radius: 10px;
+}
+
+/* Sarjalistauksen asettelu */
+#leagues-buttons button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#leagues-buttons button:hover {
+  background-color: #45a049;
 }

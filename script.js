@@ -32,7 +32,6 @@ function showLeagueDetails(index) {
     <input type="text" id="team-name" placeholder="Joukkueen nimi">
     <button onclick="addTeam(${index})">Lisää joukkue</button>
     <div id="teams-list"></div>
-    <button onclick="lockLeague(${index})">Sarja valmis</button>
     <div id="matches-list"></div>
     <button onclick="addMatch(${index})">Lisää ottelu</button>
   `;
@@ -61,21 +60,20 @@ function updateTeamsList(index) {
   });
 }
 
-// Lukitse sarja
-function lockLeague(index) {
-  // Sarjan lukitsemiseen liittyvät toimet
-}
-
 // Lisää ottelu sarjaan
 function addMatch(index) {
-  const match = {
-    team1: leagues[index].teams[0].name,
-    team2: leagues[index].teams[1].name,
-    score1: 0,
-    score2: 0,
-  };
-  leagues[index].matches.push(match);
-  updateMatchesList(index);
+  const team1 = prompt("Syötä ensimmäinen joukkue");
+  const team2 = prompt("Syötä toinen joukkue");
+  if (team1 && team2) {
+    const match = {
+      team1: team1,
+      team2: team2,
+      score1: 0,
+      score2: 0,
+    };
+    leagues[index].matches.push(match);
+    updateMatchesList(index);
+  }
 }
 
 // Päivitä otteluiden lista
