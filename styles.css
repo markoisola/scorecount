@@ -1,53 +1,76 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background: none;
+  font-family: Arial, sans-serif;
+  background-color: u;
+  margin: 0;
+  padding: 0;
 }
 
-/* Resetting default margins and paddings */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Styling for the header */
 header {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
+  background-image: url('images/header_background_pic.jpg'); /* Varmista, että tämä polku on oikein */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 30vh; /* Korkeus 30% näkymän korkeudesta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 10%; /* Varmistaa 10% tyhjän tilan molemmilla puolilla */
 }
 
-/* Background image for the rest of the page excluding the header */
-main::before {
-    content: "";
-    position: fixed;
-    top: 100px; /* Adjust this value to the height of your header */
-    left: 0;
-    width: 100%;
-    height: calc(100% - 100px); /* Ensure the background image covers the rest of the page */
-    background-image: url('images/second-background.jpg'); /* Replace with your second background image path */
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px); /* Adjust the blur level here */
-    opacity: 0.1; /* Adjust the transparency of the background image */
-    z-index: -1; /* Places the background image below other content */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Vähennetään taustakuvan läpinäkyvyyttä */
+  backdrop-filter: blur(1px); /* Vähennetään sumennusta taustakuvaan */
+  z-index: 1;
 }
 
-/* Additional content and button styling */
+header h1 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: calc(4rem + 4vw); /* Suurempi skaalaava fonttikoko */
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
+  letter-spacing: 2px;
+  width: 100%; /* Leveys */
+  text-align: center; /* Keskittää tekstin */
+  color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  header {
+    height: 25vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
+    padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
+  }
+
+  header h1 {
+    font-size: calc(1.5rem + 4vw); /* Suurempi fonttikoko pienemmillä näytöillä */
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 20vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
+    padding: 0 5%; /* Vähennetään vaakasuuntainen padding pienemmillä näytöillä */
+  }
+
+  header h1 {
+    font-size: calc(1.5rem + 5vw); /* Suurempi fonttikoko vielä pienemmillä näytöillä */
+  }
+}
+
 main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding: 0 10px;
-    position: relative;
-    z-index: 1;
+  padding: 20px;
 }
 
 
