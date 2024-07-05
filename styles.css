@@ -5,33 +5,36 @@ body {
   padding: 0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-
 header {
-  background-image: url('/images/background_pic.jpg'); /* Vaihda tähän oman kuvasi polku */
+  background-image: url('images/header_background_pic.jpg'); /* Varmista, että tämä polku on oikein */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 200px; /* Voit säätää korkeutta tarpeen mukaan */
-  color: #fff; /* Tekstin väri */
+  height: 300px; /* Voit säätää korkeutta tarpeen mukaan */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  opacity: 0.9; /* Säätää taustakuvan läpinäkyvyyttä */
+  position: relative;
+  color: #fff; /* Tekstin väri */
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Säätää taustakuvan läpinäkyvyyttä */
+  z-index: 1;
 }
 
 header h1 {
+  position: relative;
+  z-index: 2;
   margin: 0;
 }
-
-/* Muu CSS koodi */
-
 
 
 main {
