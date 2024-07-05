@@ -28,7 +28,7 @@ header::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Säätää taustakuvan läpinäkyvyyttä */
+  background-color: rgba(0, 0, 0, 0); /* Säätää taustakuvan läpinäkyvyyttä */
   backdrop-filter: blur(8px); /* Sumennus taustakuvaan */
   z-index: 1;
 }
