@@ -5,32 +5,65 @@ body {
   padding: 0;
 }
 
-header {
-  background-image: url('images/header_background_pic.jpg'); /* Varmista, että tämä polku on oikein */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 30vh; /* Korkeus 30% näkymän korkeudesta */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  padding: 0 10%; /* Varmistaa 10% tyhjän tilan molemmilla puolilla */
+/* Header osio */
+.header {
+    height: 300px; /* Aseta headerin korkeus tarpeen mukaan */
+    background-color: #333; /* Headerin taustaväri */
+    color: white; /* Tekstin väri */
+    text-align: center;
+    padding: 20px;
 }
 
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3); /* Vähennetään taustakuvan läpinäkyvyyttä */
-  backdrop-filter: blur(1px); /* Vähennetään sumennusta taustakuvaan */
-  z-index: 1;
+.header h1, .header nav {
+    margin: 0;
+    padding: 0;
 }
+
+.header nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.header nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Sivun sisältö ja taustakuva */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.content {
+    position: relative;
+    z-index: 1; /* Varmistaa, että sisältö on taustakuvan päällä */
+    padding: 20px;
+}
+
+/* Taustakuva muuhun osaan sivua */
+body::before {
+    content: "";
+    position: fixed;
+    top: 300px; /* Tämä asetus varmistaa, että taustakuva alkaa headerin jälkeen */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 300px); /* Varmistaa, että taustakuva kattaa koko loppuosan sivusta */
+    background-image: url('taustakuva.jpg'); /* Korvaa 'taustakuva.jpg' oman kuvasi polulla */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1; /* Säädä läpinäkyvyyttä tässä */
+    z-index: -1; /* Aseta taustakuva alimmaiseksi */
+}
+
 
 header h1 {
   position: relative;
