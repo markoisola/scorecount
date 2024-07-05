@@ -32,7 +32,7 @@ main::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images/second-background.jpg'); /* Replace with your second background image path */
+    background-image: url('images/header_background_pic.jpg'); /* Replace with your second background image path */
     background-size: cover;
     background-position: center;
     filter: blur(5px); /* Adjust the blur level here */
