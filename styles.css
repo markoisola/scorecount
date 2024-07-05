@@ -6,11 +6,37 @@ body {
 }
 
 header {
-  background-color: #333;
-  color: #fff;
+  header {
+  background-image: url('C:/Users/mstr_/scorecount/images/header_background_pic.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 200px; /* Voit säätää korkeutta tarpeen mukaan */
+  color: #fff; /* Tekstin väri */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 10px 0;
 }
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Säätää taustakuvan läpinäkyvyyttä */
+  z-index: 1;
+}
+
+header h1 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
 
 main {
   display: flex;
