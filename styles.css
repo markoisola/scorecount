@@ -57,7 +57,7 @@ body::before {
     left: 0;
     width: 100%;
     height: calc(100% - 300px); /* Varmistaa, että taustakuva kattaa koko loppuosan sivusta */
-    background-image: url('/images/background.jpg'); /* Korvaa 'taustakuva.jpg' oman kuvasi polulla */
+    background-image: url('/images.jpg'); /* Korvaa 'taustakuva.jpg' oman kuvasi polulla */
     background-size: cover;
     background-position: center;
     opacity: 0.1; /* Säädä läpinäkyvyyttä tässä */
