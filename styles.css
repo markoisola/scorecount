@@ -14,16 +14,17 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     background-color: #333; /* Set the background color to dark gray */
-    color: white; /* Set the text color to white for better readability */
 }
 
 /* Styling for the header */
 header {
-    height: 300px; /* Set the height of the header */
-    background-color: #333; /* Set the background color of the header to match the body */
-    color: white; /* Set the text color of the header */
-    text-align: center; /* Center align the text */
-    padding: 20px; /* Add padding to the header */
+    height: 300px; /* Aseta headerin korkeus tarpeen mukaan */
+    background-color: #333; /* Headerin taustaväri */
+    color: white; /* Tekstin väri */
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 header h1, header nav {
@@ -58,20 +59,20 @@ main {
 aside {
     flex: 1 1 200px;
     padding: 10px;
-    background-color: #444; /* Set a slightly lighter gray background for aside */
+    background-color: transparent; /* Ensure aside background is transparent */
 }
 
 #league-details, #standings-section {
     flex: 2 1 600px;
     padding: 10px;
     margin: 0 10px;
-    background-color: #444; /* Set a slightly lighter gray background for sections */
+    background-color: transparent; /* Ensure sections background is transparent */
 }
 
 #standings-sidebar {
     flex: 1 1 300px;
     padding: 10px;
-    background-color: #444; /* Set a slightly lighter gray background for aside */
+    background-color: transparent; /* Ensure aside background is transparent */
 }
 
 section {
