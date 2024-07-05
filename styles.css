@@ -10,7 +10,7 @@ header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 50vh; /* Korkeus 50% näkymän korkeudesta */
+  height: 30vh; /* Pienempi korkeus */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,6 @@ header {
   position: relative;
   color: #fff; /* Tekstin väri */
   overflow: hidden;
-  padding: 0 20%; /* Lisätään vaakasuuntainen padding */
 }
 
 
@@ -26,41 +25,43 @@ header h1 {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: 7vw; /* Skaalautuva fonttikoko */
+  font-size: calc(1.5rem + 2vw); /* Skaalautuva fonttikoko */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); /* Tekstin varjo luo kohokuvion */
-  letter-spacing: 6px;
-  width: 100%; /* Leveys */
+  letter-spacing: 2px;
+  width: 60%; /* Leveys */
+  max-width: 60%;
   text-align: center; /* Keskittää tekstin */
   color: rgba(255, 255, 255, 0.3); /* Läpinäkyvä teksti */
-  max-width: 60%; /* Maksimileveys tekstille */
+  padding: 0 20%; /* Varmistaa 20% tyhjän tilan molemmilla puolilla */
 }
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   header {
-    height: 40vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
+    height: 25vh; /* Pienennetään headerin korkeutta pienemmillä näytöillä */
   }
 
   header h1 {
-    font-size: 7vw; /* Suurempi fonttikoko pienemmillä näytöillä */
+    font-size: calc(1.5rem + 4vw); /* Suurempi fonttikoko pienemmillä näytöillä */
   }
 }
 
 @media (max-width: 480px) {
   header {
-    height: 30vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
+    height: 20vh; /* Pienennetään headerin korkeutta vielä enemmän pienemmillä näytöillä */
   }
 
   header h1 {
-    font-size: 8vw; /* Suurempi fonttikoko vielä pienemmillä näytöillä */
+    font-size: calc(1.5rem + 5vw); /* Suurempi fonttikoko vielä pienemmillä näytöillä */
   }
 }
 
 main {
   padding: 20px;
 }
+
 
 
 main {
