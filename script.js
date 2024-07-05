@@ -1,457 +1,168 @@
-// Funktio sarjan luomiseen
+// Sarjalistaus ja tietojen tallennus
+let leagues = [];
+
+// Luo uusi sarja
 function createLeague() {
-  const leagueName = document.getElementById('league-name').value.trim();
-  if (leagueName === '') {
-    alert('Syötä sarjan nimi');
-    return;
+  const leagueName = document.getElementById('league-name').value;
+  if (leagueName) {
+    leagues.push({ name: leagueName, teams: [], matches: [] });
+    updateLeaguesSidebar();
+    document.getElementById('league-name').value = '';
   }
-
-  // Luodaan uusi sarja-objekti
-  const league = {
-    name: leagueName,
-    teams: [],
-    matches: [],
-    locked: false
-  };
-
-  // Tallennetaan sarja paikalliseen tallennustilaan
-  let leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  leagues.push(league);
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  // Päivitetään sivun näkymä
-  displayLeagues();
-  document.getElementById('league-name').value = '';
 }
 
-// Funktio näyttää aktiiviset sarjat painonappeina
-function displayLeagues() {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
+// Päivitä sarjalistaus sivupalkissa
+function updateLeaguesSidebar() {
   const leaguesButtons = document.getElementById('leagues-buttons');
   leaguesButtons.innerHTML = '';
-
   leagues.forEach((league, index) => {
     const button = document.createElement('button');
     button.textContent = league.name;
-    button.setAttribute('data-index', index);
-    button.onclick = () => {
-      showLeagueDetails(index);
-    };
+    button.onclick = () => showLeagueDetails(index);
     leaguesButtons.appendChild(button);
   });
-
-  displayAllStandings();
 }
 
-// Funktio näyttää valitun sarjan tiedot ja hallintatoiminnot
+// Näytä sarjan tiedot
 function showLeagueDetails(index) {
-  document.getElementById('league-details').style.display = 'block';
-  document.getElementById('standings-section').style.display = 'none';
-  document.getElementById('standings-sidebar').style.display = 'block';
-
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[index];
-
-  const leagueDetailsSection = document.getElementById('league-details');
-  leagueDetailsSection.innerHTML = '';
-
-  const h2 = document.createElement('h2');
-  h2.textContent = selectedLeague.name;
-  leagueDetailsSection.appendChild(h2);
-
-  if (!selectedLeague.locked) {
-    const teamInput = document.createElement('input');
-    teamInput.setAttribute('type', 'text');
-    teamInput.setAttribute('id', 'team-name');
-    teamInput.setAttribute('placeholder', 'Joukkueen nimi');
-    leagueDetailsSection.appendChild(teamInput);
-
-    const addTeamButton = document.createElement('button');
-    addTeamButton.textContent = 'Lisää joukkue';
-    addTeamButton.onclick = () => {
-      addTeam(index);
-    };
-    leagueDetailsSection.appendChild(addTeamButton);
-
-    const lockLeagueButton = document.createElement('button');
-    lockLeagueButton.textContent = 'Sarja valmis';
-    lockLeagueButton.onclick = () => {
-      lockLeague(index);
-    };
-    leagueDetailsSection.appendChild(lockLeagueButton);
-  }
-
-  const teamsList = document.createElement('ul');
-  selectedLeague.teams.forEach(team => {
-    const li = document.createElement('li');
-    li.textContent = team.name;
-    li.className = 'team-name';
-    teamsList.appendChild(li);
-  });
-  leagueDetailsSection.appendChild(teamsList);
-
-  if (selectedLeague.locked) {
-    const addMatchButton = document.createElement('button');
-    addMatchButton.textContent = 'Lisää ottelu';
-    addMatchButton.onclick = () => {
-      showAddMatchForm(index);
-    };
-    leagueDetailsSection.appendChild(addMatchButton);
-
-    const matchesList = document.createElement('div');
-    selectedLeague.matches.forEach((match, matchIndex) => {
-      const matchDiv = document.createElement('div');
-      matchDiv.className = 'match';
-
-      let team1Style = '';
-      let team2Style = '';
-      let score1Style = '';
-      let score2Style = '';
-      if (match.score1 !== undefined && match.score2 !== undefined) {
-        if (match.score1 > match.score2) {
-          team1Style = 'font-weight: bold;';
-          score1Style = 'font-weight: bold;';
-        } else {
-          team2Style = 'font-weight: bold;';
-          score2Style = 'font-weight: bold;';
-        }
-      }
-
-      matchDiv.innerHTML = `
-        <div class="match-info">
-          <span class="team-name" style="${team1Style}">${shortenName(match.team1)}</span>
-          <span class="vs">vs</span>
-          <span class="team-name" style="${team2Style}">${shortenName(match.team2)}</span>
-          <span class="score" id="result-${index}-${matchIndex}">
-            <span style="${score1Style}">${match.score1 !== undefined ? match.score1 : ''}</span>
-            -
-            <span style="${score2Style}">${match.score2 !== undefined ? match.score2 : ''}</span>
-          </span>
-        </div>
-        <div class="match-buttons">
-          <button class="add-result" onclick="showAddResultForm(${index}, ${matchIndex})">Lisää tulos</button>
-          <button class="edit" onclick="editMatch(${index}, ${matchIndex})">Muokkaa</button>
-          <button class="delete" onclick="deleteMatch(${index}, ${matchIndex})">Poista</button>
-        </div>
-      `;
-      matchesList.appendChild(matchDiv);
-    });
-    leagueDetailsSection.appendChild(matchesList);
-
-    displayStandings(selectedLeague);
-  }
+  const league = leagues[index];
+  const leagueDetails = document.getElementById('league-details');
+  leagueDetails.innerHTML = `
+    <h2>${league.name}</h2>
+    <input type="text" id="team-name" placeholder="Joukkueen nimi">
+    <button onclick="addTeam(${index})">Lisää joukkue</button>
+    <div id="teams-list"></div>
+    <button onclick="lockLeague(${index})">Sarja valmis</button>
+    <div id="matches-list"></div>
+    <button onclick="addMatch(${index})">Lisää ottelu</button>
+  `;
+  updateTeamsList(index);
+  updateMatchesList(index);
 }
 
-// Funktio joukkueen nimen lyhentämiseen
-function shortenName(name) {
-  if (name.length > 12) {
-    return name.substring(0, 10) + '...';
-  }
-  return name;
-}
-
-// Funktio joukkueen lisäämiseen
+// Lisää joukkue sarjaan
 function addTeam(index) {
-  const teamName = document.getElementById('team-name').value.trim();
-  if (teamName === '') {
-    alert('Syötä joukkueen nimi');
-    return;
+  const teamName = document.getElementById('team-name').value;
+  if (teamName) {
+    leagues[index].teams.push({ name: teamName, points: 0, pointsDifference: 0 });
+    updateTeamsList(index);
+    document.getElementById('team-name').value = '';
   }
-
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  leagues[index].teams.push({ name: teamName });
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  showLeagueDetails(index);
 }
 
-// Funktio sarjan lukitsemiseen
+// Päivitä joukkueiden lista
+function updateTeamsList(index) {
+  const teamsList = document.getElementById('teams-list');
+  teamsList.innerHTML = '';
+  leagues[index].teams.forEach(team => {
+    const div = document.createElement('div');
+    div.textContent = team.name;
+    teamsList.appendChild(div);
+  });
+}
+
+// Lukitse sarja
 function lockLeague(index) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  leagues[index].locked = true;
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  showLeagueDetails(index);
-  displayStandings(leagues[index]);
+  // Sarjan lukitsemiseen liittyvät toimet
 }
 
-// Funktio ottelun lisäämiseen
-function showAddMatchForm(index) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[index];
-
-  const form = document.createElement('div');
-  form.innerHTML = `
-    <select id="team1-select">
-      ${selectedLeague.teams.map(team => `<option value="${team.name}">${team.name}</option>`).join('')}
-    </select>
-    <select id="team2-select">
-      ${selectedLeague.teams.map(team => `<option value="${team.name}">${team.name}</option>`).join('')}
-    </select>
-    <button onclick="addMatch(${index})">Luo ottelu</button>
-  `;
-
-  document.getElementById('league-details').appendChild(form);
-}
-
+// Lisää ottelu sarjaan
 function addMatch(index) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[index];
-
-  const team1 = document.getElementById('team1-select').value;
-  const team2 = document.getElementById('team2-select').value;
-
-  selectedLeague.matches.push({
-    team1: team1,
-    team2: team2
-  });
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  showLeagueDetails(index);
+  const match = {
+    team1: leagues[index].teams[0].name,
+    team2: leagues[index].teams[1].name,
+    score1: 0,
+    score2: 0,
+  };
+  leagues[index].matches.push(match);
+  updateMatchesList(index);
 }
 
-// Funktio ottelun muokkaamiseen
-function editMatch(leagueIndex, matchIndex) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[leagueIndex];
-  const match = selectedLeague.matches[matchIndex];
-
-  const form = document.createElement('div');
-  form.innerHTML = `
-    <select id="team1-select-edit">
-      ${selectedLeague.teams.map(team => `<option value="${team.name}" ${team.name === match.team1 ? 'selected' : ''}>${team.name}</option>`).join('')}
-    </select>
-    <select id="team2-select-edit">
-      ${selectedLeague.teams.map(team => `<option value="${team.name}" ${team.name === match.team2 ? 'selected' : ''}>${team.name}</option>`).join('')}
-    </select>
-    <button onclick="updateMatch(${leagueIndex}, ${matchIndex})">Tallenna</button>
-  `;
-
-  document.getElementById(`result-${leagueIndex}-${matchIndex}`).appendChild(form);
-}
-
-function updateMatch(leagueIndex, matchIndex) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[leagueIndex];
-  const match = selectedLeague.matches[matchIndex];
-
-  match.team1 = document.getElementById('team1-select-edit').value;
-  match.team2 = document.getElementById('team2-select-edit').value;
-
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  showLeagueDetails(leagueIndex);
-}
-
-// Funktio ottelun poistamiseen
-function deleteMatch(leagueIndex, matchIndex) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[leagueIndex];
-
-  selectedLeague.matches.splice(matchIndex, 1);
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  showLeagueDetails(leagueIndex);
-  displayStandings(selectedLeague);
-}
-
-// Funktio tuloksen lisäämiseen
-function showAddResultForm(leagueIndex, matchIndex) {
-  const form = document.createElement('div');
-  form.className = 'result-form';
-  form.innerHTML = `
-    <input type="number" id="score1-${leagueIndex}-${matchIndex}" placeholder="Pisteet joukkue 1">
-    <input type="number" id="score2-${leagueIndex}-${matchIndex}" placeholder="Pisteet joukkue 2">
-    <button onclick="addResult(${leagueIndex}, ${matchIndex})">Lisää tulos</button>
-  `;
-
-  document.getElementById(`result-${leagueIndex}-${matchIndex}`).appendChild(form);
-}
-
-function addResult(leagueIndex, matchIndex) {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const selectedLeague = leagues[leagueIndex];
-  const match = selectedLeague.matches[matchIndex];
-
-  match.score1 = parseInt(document.getElementById(`score1-${leagueIndex}-${matchIndex}`).value, 10);
-  match.score2 = parseInt(document.getElementById(`score2-${leagueIndex}-${matchIndex}`).value, 10);
-
-  localStorage.setItem('leagues', JSON.stringify(leagues));
-
-  showLeagueDetails(leagueIndex);
-  displayStandings(selectedLeague);
-}
-
-// Funktio sarjan standingsin laskemiseen ja näyttämiseen
-function calculateStandings(league) {
-  const standings = league.teams.map(team => ({
-    name: team.name,
-    points: 0,
-    scored: 0,
-    conceded: 0,
-    ko: ''
-  }));
-
-  league.matches.forEach(match => {
-    const team1 = standings.find(team => team.name === match.team1);
-    const team2 = standings.find(team => team.name === match.team2);
-
-    if (match.score1 !== undefined && match.score2 !== undefined) {
-      team1.scored += match.score1;
-      team1.conceded += match.score2;
-      team2.scored += match.score2;
-      team2.conceded += match.score1;
-
-      if (match.score1 > match.score2) {
-        team1.points += 2;
-        team1.ko = match.score1 > match.score2 ? ' KO' : '';
-      } else {
-        team2.points += 2;
-        team2.ko = match.score2 > match.score1 ? ' KO' : '';
-      }
-    }
-  });
-
-  standings.sort((a, b) => {
-    if (b.points !== a.points) return b.points - a.points;
-    const teamA = league.teams.find(team => team.name === a.name);
-    const teamB = league.teams.find(team => team.name === b.name);
-    const match = league.matches.find(match => (match.team1 === teamA.name && match.team2 === teamB.name) || (match.team1 === teamB.name && match.team2 === teamA.name));
-    if (match) {
-      if (match.score1 > match.score2) return match.team1 === a.name ? -1 : 1;
-      if (match.score2 > match.score1) return match.team2 === a.name ? -1 : 1;
-    }
-    return 0;
-  });
-
-  return standings;
-}
-
-function displayStandings(league) {
-  const standings = calculateStandings(league);
-  const standingsDiv = document.getElementById('standings');
-  standingsDiv.innerHTML = '';
-
-  const table = document.createElement('table');
-  table.className = 'standings-table';
-  table.innerHTML = `
-    <tr>
-      <th>Joukkue</th>
-      <th>Pisteet</th>
-    </tr>
-  `;
-
-  standings.forEach(team => {
-    const row = document.createElement('tr');
-    row.className = 'table-row';
-    row.innerHTML = `
-      <td class="team-name">${shortenName(team.name)}</td>
-      <td class="points">${team.points}${team.ko}</td>
+// Päivitä otteluiden lista
+function updateMatchesList(index) {
+  const matchesList = document.getElementById('matches-list');
+  matchesList.innerHTML = '';
+  leagues[index].matches.forEach((match, matchIndex) => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      ${match.team1} vs ${match.team2} - 
+      <input type="text" id="score1-${index}-${matchIndex}" value="${match.score1}" size="1"> - 
+      <input type="text" id="score2-${index}-${matchIndex}" value="${match.score2}" size="1">
+      <button onclick="updateScore(${index}, ${matchIndex})">Päivitä tulos</button>
     `;
-    table.appendChild(row);
+    matchesList.appendChild(div);
   });
-
-  const standingsContainer = document.createElement('div');
-  standingsContainer.className = 'standings-container';
-  standingsContainer.appendChild(table);
-  standingsDiv.appendChild(standingsContainer);
 }
 
+// Päivitä ottelun tulos
+function updateScore(leagueIndex, matchIndex) {
+  const score1 = parseInt(document.getElementById(`score1-${leagueIndex}-${matchIndex}`).value, 10);
+  const score2 = parseInt(document.getElementById(`score2-${leagueIndex}-${matchIndex}`).value, 10);
+  
+  leagues[leagueIndex].matches[matchIndex].score1 = score1;
+  leagues[leagueIndex].matches[matchIndex].score2 = score2;
+  
+  // Päivitä joukkueiden pisteet ja piste-ero
+  const team1 = leagues[leagueIndex].teams.find(team => team.name === leagues[leagueIndex].matches[matchIndex].team1);
+  const team2 = leagues[leagueIndex].teams.find(team => team.name === leagues[leagueIndex].matches[matchIndex].team2);
+  
+  if (score1 > score2) {
+    team1.points += 2;
+  } else {
+    team2.points += 2;
+  }
+  
+  team1.pointsDifference += (score1 - score2);
+  team2.pointsDifference += (score2 - score1);
+  
+  updateTeamsList(leagueIndex);
+}
+
+// Näytä kaikkien sarjojen pistetilanne
 function showAllStandings() {
-  document.getElementById('league-details').style.display = 'none';
-  document.getElementById('standings-section').style.display = 'block';
-  document.getElementById('standings-sidebar').style.display = 'none';
-  displayAllStandings();
-}
-
-function displayAllStandings() {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  const allStandingsDiv = document.getElementById('all-standings');
-  allStandingsDiv.innerHTML = '';
-
+  const standingsSection = document.getElementById('standings-section');
+  standingsSection.style.display = 'block';
+  const allStandings = document.getElementById('all-standings');
+  allStandings.innerHTML = '';
   leagues.forEach(league => {
-    const standings = calculateStandings(league);
-
-    const leagueStandingsDiv = document.createElement('div');
-    leagueStandingsDiv.className = 'standings-container';
-
-    const h3 = document.createElement('h3');
-    h3.textContent = league.name;
-    leagueStandingsDiv.appendChild(h3);
-
-    const table = document.createElement('table');
-    table.className = 'standings-table';
-    table.innerHTML = `
-      <tr>
-        <th>Joukkue</th>
-        <th>Pisteet</th>
-        <th>Piste-ero</th>
-      </tr>
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <h3>${league.name}</h3>
+      <div>${generateStandingsTable(league.teams)}</div>
     `;
-
-    standings.forEach(team => {
-      const row = document.createElement('tr');
-      row.className = 'table-row';
-      row.innerHTML = `
-        <td class="team-name">${shortenName(team.name)}</td>
-        <td class="points">${team.points}${team.ko}</td>
-        <td class="goal-difference">${team.scored} : ${team.conceded}</td>
-      `;
-      table.appendChild(row);
-    });
-
-    leagueStandingsDiv.appendChild(table);
-    allStandingsDiv.appendChild(leagueStandingsDiv);
+    allStandings.appendChild(div);
   });
 }
 
-// Funktio tietojen tallentamiseen tiedostoon
+// Luo pistetilannetaulukko
+function generateStandingsTable(teams) {
+  let table = '<table><tr><th>Joukkue</th><th>Pisteet</th><th>Piste-ero</th></tr>';
+  teams.forEach(team => {
+    table += `<tr><td>${team.name}</td><td>${team.points}</td><td>${team.pointsDifference}</td></tr>`;
+  });
+  table += '</table>';
+  return table;
+}
+
+// Tallenna tiedot
 function saveData() {
-  const leagues = JSON.parse(localStorage.getItem('leagues')) || [];
-  let data = '';
+  const dataStr = JSON.stringify(leagues);
+  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
-  leagues.forEach(league => {
-    data += `Sarja: ${league.name}\n\nJoukkueet:\n`;
-    league.teams.forEach(team => {
-      data += `${team.name}\n`;
-    });
+  const exportFileDefaultName = 'leagues_data.txt';
 
-    data += `\nOttelut:\n`;
-    league.matches.forEach(match => {
-      data += `${match.team1} vs ${match.team2}`;
-      if (match.score1 !== undefined && match.score2 !== undefined) {
-        data += `: ${match.score1} - ${match.score2}`;
-      }
-      data += '\n';
-    });
-
-    data += `\nSarjataulukko:\n`;
-    const standings = calculateStandings(league);
-    standings.forEach(team => {
-      data += `${team.name}, Pisteet: ${team.points}, Piste-ero: ${team.scored} : ${team.conceded}\n`;
-    });
-
-    data += '\n-----------------------------------\n\n';
-  });
-
-  const blob = new Blob([data], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'koripalloturnaus_tiedot.txt';
-  a.click();
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
 }
 
-// Funktio tietojen nollaamiseen
+// Nollaa kaikki tiedot
 function resetData() {
-  const confirmation = confirm("Oletko varma, että haluat nollata kaikki tiedot?");
-  if (confirmation) {
-    localStorage.removeItem('leagues');
-    displayLeagues();
+  if (confirm('Haluatko varmasti nollata kaikki tiedot?')) {
+    leagues = [];
+    updateLeaguesSidebar();
     document.getElementById('league-details').innerHTML = '';
-    document.getElementById('standings').innerHTML = '';
-    document.getElementById('all-standings').innerHTML = '';
+    document.getElementById('standings-section').style.display = 'none';
   }
 }
-
-// Kutsutaan funktioita sivun latautuessa
-displayLeagues();
