@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  background-image: url('path/to/your/image.jpg'); /* Vaihda tähän oman kuvasi polku */
+  background-image: url('/images/background_pic.jpg'); /* Vaihda tähän oman kuvasi polku */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
