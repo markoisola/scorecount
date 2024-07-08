@@ -6,11 +6,47 @@ body {
 }
 
 header {
-  background-color: #333;
-  color: #fff;
+  background-image: url('images/header_background_pic.jpg'); /* Taustakuva */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 20vh; /* Korkeus 20% näkymän korkeudesta */
+  display: flex; /* Flexbox keskittämistä varten */
+  align-items: center; /* Keskittää sisällön pystysuunnassa */
+  justify-content: center; /* Keskittää sisällön vaakasuunnassa */
   text-align: center;
-  padding: 10px 0;
+  position: relative; /* Tarvitaan pseudo-elementtiä varten */
+  overflow: hidden;
 }
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1); /* Taustakuvan sumennus */
+  backdrop-filter: blur(2px); /* Taustakuvan sumennus */
+  z-index: 1;
+}
+
+header h1 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  width: 60%;
+  font-size: calc(3rem + 5vw);
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Tekstin varjo */
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.3); /* Tekstin läpinäkyvyys */
+  text-transform: uppercase; /* CAPS-lock */
+  text-align: center; /* Keskitetty teksti */
+}
+
+
 
 main {
   display: flex;
