@@ -426,5 +426,17 @@ function saveData() {
   a.click();
 }
 
+// Funktio tietojen nollaamiseen
+function resetData() {
+  const confirmation = confirm("Oletko varma, että haluat nollata kaikki tiedot?");
+  if (confirmation) {
+    localStorage.removeItem('leagues');
+    displayLeagues();
+    document.getElementById('league-details').innerHTML = '';
+    document.getElementById('standings').innerHTML = '';
+    document.getElementById('all-standings').innerHTML = '';
+  }
+}
+
 // Kutsutaan funktioita sivun latautuessa
 displayLeagues();

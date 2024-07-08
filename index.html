@@ -15,7 +15,7 @@
     <aside>
       <section id="create-league">
         <h2>Luo uusi sarja</h2>
-        <input type="text" id="league-name" placeholder="Sarjan nimi">
+        <input type="text" id="league-name" placeholder="Sarjan nimi" maxlength="20">
         <button onclick="createLeague()">Luo sarja</button>
       </section>
       
@@ -42,6 +42,7 @@
   </main>
   
   <button id="save-button" onclick="saveData()">Tallenna</button>
+  <button id="reset-button" onclick="resetData()">Nollaa tiedot</button>
   
   <script src="script.js"></script>
 </body>
