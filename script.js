@@ -288,7 +288,8 @@ function calculateStandings(league) {
     name: team.name,
     points: 0,
     scored: 0,
-    conceded: 0
+    conceded: 0,
+    matches: [] // Lisätään tähän otteluiden tuloksia
   }));
   
   league.matches.forEach(match => {
@@ -301,6 +302,9 @@ function calculateStandings(league) {
       team2.scored += match.score2;
       team2.conceded += match.score1;
       
+      team1.matches.push({ opponent: match.team2, score: match.score1 - match.score2 });
+      team2.matches.push({ opponent: match.team1, score: match.score2 - match.score1 });
+      
       if (match.score1 > match.score2) {
         team1.points += 2;
       } else {
@@ -308,6 +312,26 @@ function calculateStandings(league) {
       }
     }
   });
+  
+  standings.sort((a, b) => b.points - a.points || b.scored - b.conceded - (a.scored - a.conceded));
+
+  // Tarkastetaan tasapisteet ja keskinäisen ottelun tulos
+  for (let i = 0; i < standings.length - 1; i++) {
+    if (standings[i].points === standings[i + 1].points) {
+      const team1 = standings[i];
+      const team2 = standings[i + 1];
+      const match = team1.matches.find(m => m.opponent === team2.name);
+      
+      if (match) {
+        if (match.score > 0) {
+          standings[i].tieBreaker = '(KO)';
+        } else if (match.score < 0) {
+          standings[i + 1].tieBreaker = '(KO)';
+          standings[i] = standings.splice(i + 1, 1, standings[i])[0]; // Vaihdetaan joukkueet
+        }
+      }
+    }
+  }
   
   return standings;
 }
@@ -330,7 +354,7 @@ function displayStandings(league) {
     const row = document.createElement('tr');
     row.className = 'table-row';
     row.innerHTML = `
-      <td class="team-name">${shortenName(team.name)}</td>
+      <td class="team-name">${shortenName(team.name)} ${team.tieBreaker || ''}</td>
       <td class="points">${team.points}</td>
     `;
     table.appendChild(row);
@@ -378,7 +402,7 @@ function displayAllStandings() {
       const row = document.createElement('tr');
       row.className = 'table-row';
       row.innerHTML = `
-        <td class="team-name">${shortenName(team.name)}</td>
+        <td class="team-name">${shortenName(team.name)} ${team.tieBreaker || ''}</td>
         <td class="points">${team.points}</td>
         <td class="goal-difference">${team.scored} : ${team.conceded}</td>
       `;
@@ -389,6 +413,7 @@ function displayAllStandings() {
     allStandingsDiv.appendChild(leagueStandingsDiv);
   });
 }
+
 
 // Funktio tietojen tallentamiseen tiedostoon
 function saveData() {
